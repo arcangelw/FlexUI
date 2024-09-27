@@ -1,0 +1,51 @@
+{
+  "originHash" : "d97919721b405d886e3d549359e5ba5f5c0e3e5e1d6ab637bbe2db7195792e1e",
+  "pins" : [
+    {
+      "identity" : "descriptors",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/FluidGroup/Descriptors",
+      "state" : {
+        "revision" : "f41ce2605a76c5d378fe8c5e8c5c98b544dfd108",
+        "version" : "0.2.3"
+      }
+    },
+    {
+      "identity" : "flexlayout",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/layoutBox/FlexLayout",
+      "state" : {
+        "revision" : "9b46c098c0471b847e6feee49692ae239633bae3",
+        "version" : "2.0.10"
+      }
+    },
+    {
+      "identity" : "lookinserver",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/QMUI/LookinServer.git",
+      "state" : {
+        "revision" : "e553d1b689d147817dc54ad5c28fcff71e860101",
+        "version" : "1.2.8"
+      }
+    },
+    {
+      "identity" : "texture",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/FluidGroup/Texture.git",
+      "state" : {
+        "revision" : "68df47f0d26522da76b06f22e9a97e4d4ab58dad",
+        "version" : "3.0.2"
+      }
+    },
+    {
+      "identity" : "textureswiftsupport",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/TextureCommunity/TextureSwiftSupport",
+      "state" : {
+        "revision" : "fb748d6a9d0a2dca0635227e1db0360fd26e0e24",
+        "version" : "3.20.1"
+      }
+    }
+  ],
+  "version" : 3
+}
