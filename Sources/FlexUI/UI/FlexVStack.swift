@@ -10,12 +10,12 @@ import UIKit
 
 public struct FlexVStack<View: UIView>: FlexView, _FlexViewType {
     public let view: View
-    public let spacing: CGFloat
-    public let justifyContent: Flex.JustifyContent
-    public let alignItems: Flex.AlignItems
-    public let flexWrap: FlexWrap
-    public let isReverse: Bool
-    public let children: _FlexViewType
+    private let spacing: CGFloat
+    private let justifyContent: Flex.JustifyContent
+    private let alignItems: Flex.AlignItems
+    private let flexWrap: FlexWrap
+    private let isReverse: Bool
+    private let children: _FlexViewType
 
     public init(
         _ view: View = _FlexView() as UIView,
@@ -35,6 +35,7 @@ public struct FlexVStack<View: UIView>: FlexView, _FlexViewType {
         children = content()
     }
 
+    @_spi(Internals)
     @discardableResult
     public func define(superFlex: FlexLayout.Flex) -> Self {
         superFlex.addItem(view)
@@ -44,6 +45,7 @@ public struct FlexVStack<View: UIView>: FlexView, _FlexViewType {
 }
 
 extension FlexVStack: _FlexLayoutDefinable {
+    @_spi(Internals)
     public func layoutDefine() {
         let stack = view.flex.direction(isReverse ? .columnReverse : .column)
             .justifyContent(justifyContent)

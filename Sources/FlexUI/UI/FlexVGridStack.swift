@@ -10,13 +10,13 @@ import UIKit
 
 public struct FlexVGridStack: FlexView, _FlexViewType {
     public let view: UIView = _FlexVGridView()
-    public let columnCount: Int
-    public let lineSpacing: CGFloat
-    public let interitemSpacing: CGFloat
-    public let rowHeight: CGFloat?
-    public let justifyContent: Flex.JustifyContent
-    public let alignItems: Flex.AlignItems
-    public let children: _FlexViewType
+    private let columnCount: Int
+    private let lineSpacing: CGFloat
+    private let interitemSpacing: CGFloat
+    private let rowHeight: CGFloat?
+    private let justifyContent: Flex.JustifyContent
+    private let alignItems: Flex.AlignItems
+    private let children: _FlexViewType
 
     public init(
         columnCount: Int = 2,
@@ -37,6 +37,8 @@ public struct FlexVGridStack: FlexView, _FlexViewType {
         children = content()
     }
 
+    @_spi(Internals)
+    @discardableResult
     public func define(superFlex: FlexLayout.Flex) -> Self {
         // swiftlint:disable:next force_cast
         let view = view as! _FlexVGridView

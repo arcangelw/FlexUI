@@ -12,6 +12,7 @@ public protocol _FlexLayoutDefinable {
     /// 定义布局规则的方法。
     ///
     /// 该方法将在实现该协议的视图中调用，负责设置子视图的布局逻辑。
+    @_spi(Internals)
     func layoutDefine()
 }
 
@@ -19,6 +20,7 @@ extension FlexModifiedContent: _FlexLayoutDefinable where Content: _FlexLayoutDe
     /// 扩展 `FlexModifiedContent` 以遵守 `_FlexLayoutDefinable` 协议。
     ///
     /// 该方法首先执行 `flex_make()` 来创建布局上下文，然后调用其子视图 `content` 的 `layoutDefine()` 方法来定义具体布局规则。
+    @_spi(Internals)
     public func layoutDefine() {
         _ = flex_make()
         content.layoutDefine()

@@ -11,6 +11,7 @@ import UIKit
 public protocol FlexView {
     associatedtype View: UIView
     var view: View { get }
+    @_spi(Internals)
     @discardableResult
     func define(superFlex: FlexLayout.Flex) -> Self
 }

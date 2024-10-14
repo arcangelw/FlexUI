@@ -32,6 +32,7 @@ class ViewController: BasicViewController {
                         .layoutDirection(.vertical)
                         .alwaysBounces(true)
                         .showsScrollIndicator(true)
+                        .grow(1).shrink(1)
                         .marginHorizontal(10)
                         .contentStack { stack in
                             stack

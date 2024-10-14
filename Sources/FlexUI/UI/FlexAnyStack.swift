@@ -17,7 +17,7 @@ public protocol _FlexAnyStackType {
 
 public struct FlexAnyStack<View: UIView>: FlexView, _FlexViewType, _FlexAnyStackType {
     public let view: View
-    public private(set) var children: UnsafeMutablePointer<any _FlexViewType>
+    private var children: UnsafeMutablePointer<any _FlexViewType>
 
     public init(_ view: View = _FlexView() as UIView) {
         self.view = view
@@ -42,6 +42,7 @@ public struct FlexAnyStack<View: UIView>: FlexView, _FlexViewType, _FlexAnyStack
         layoutDefine()
     }
 
+    @_spi(Internals)
     @discardableResult
     public func define(superFlex: FlexLayout.Flex) -> Self {
         superFlex.addItem(view)
@@ -64,6 +65,7 @@ public extension FlexModifiedContent where Content: _FlexAnyStackType {
 }
 
 extension FlexAnyStack: _FlexLayoutDefinable {
+    @_spi(Internals)
     public func layoutDefine() {
         for child in children.value.flex_make() {
             child.define(superFlex: view.flex)

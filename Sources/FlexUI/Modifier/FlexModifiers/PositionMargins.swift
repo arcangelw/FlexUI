@@ -101,6 +101,7 @@ public struct FlexMarginModifier: _FlexModifierType {
     /// 应用外边距到指定的视图。
     /// - Parameter element: 需要修改的视图。
     /// - Returns: 经过修改的视图。
+    @_spi(Internals)
     public func modify(element: any FlexView) -> any FlexView {
         let flex = element.view.flex
         marginLeftPointer.bindNoOptionalValue(flex.marginLeft(_:), flex.marginLeft(_:))

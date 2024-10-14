@@ -9,7 +9,7 @@ import FlexLayout
 import UIKit
 
 public struct FlexSpacer: FlexView, _FlexViewType {
-    public let view: UIView = _FlexView()
+    public let view: UIView = _FlexSpacerView()
 
     private let minLength: CGFloat
 
@@ -21,15 +21,17 @@ public struct FlexSpacer: FlexView, _FlexViewType {
         self.flexGrow = flexGrow
     }
 
+    @_spi(Internals)
     @discardableResult
     public func define(superFlex: FlexLayout.Flex) -> Self {
-        let flex = superFlex.addItem(view).grow(flexGrow)
-        switch superFlex.direction {
-        case .row, .rowReverse:
-            flex.width(minLength)
-        default:
-            flex.height(minLength)
-        }
+        superFlex.addItem(view).grow(flexGrow).basis(minLength)
         return self
+    }
+}
+
+private class _FlexSpacerView: _FlexView {
+    override public init(frame: CGRect) {
+        super.init(frame: frame)
+        super.isHidden = true
     }
 }

@@ -9,19 +9,14 @@ import FlexLayout
 import UIKit
 
 public protocol _FlexContentViewType {
-    var view: UIView { get }
     @discardableResult
     func content(@FlexViewBuilder content: () -> any _FlexViewType) -> Self
 }
 
-protocol _FlexInternalContentViewType {
-    func commit()
-}
-
-public struct FlexContentStack: FlexView, _FlexViewType, _FlexContentViewType, _FlexInternalContentViewType {
+public struct FlexContentStack: FlexView, _FlexViewType, _FlexContentViewType {
     public let view: UIView
 
-    fileprivate var children: UnsafeMutablePointer<any _FlexViewType>
+    private var children: UnsafeMutablePointer<any _FlexViewType>
 
     init(_ view: UIView) {
         self.view = view
@@ -34,27 +29,22 @@ public struct FlexContentStack: FlexView, _FlexViewType, _FlexContentViewType, _
         return self
     }
 
+    @_spi(Internals)
     public func define(superFlex _: FlexLayout.Flex) -> Self {
         return self
     }
+}
 
-    func commit() {
+extension FlexContentStack: _FlexLayoutDefinable {
+    @_spi(Internals)
+    public func layoutDefine() {
         for child in children.value.flex_make() {
             child.define(superFlex: view.flex)
         }
     }
 }
 
-extension FlexModifiedContent: _FlexContentViewType, _FlexInternalContentViewType where Content: _FlexContentViewType {
-    public var view: UIView {
-        return content.view
-    }
-
-    func commit() {
-        _ = flex_make()
-        (content as? FlexContentStack)?.commit()
-    }
-
+extension FlexModifiedContent: _FlexContentViewType where Content: _FlexContentViewType {
     @discardableResult
     public func content(@FlexViewBuilder content: () -> any _FlexViewType) -> Self {
         self.content.content(content: content)

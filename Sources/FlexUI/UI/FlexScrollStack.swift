@@ -58,10 +58,12 @@ public struct FlexScrollStack: FlexView, _FlexViewType, _FlexContentStackType {
         return self
     }
 
+    @_spi(Internals)
+    @discardableResult
     public func define(superFlex: FlexLayout.Flex) -> Self {
-        superFlex.addItem(view).grow(1).shrink(1)
-        if let contentStack = contentStackPointer.value as? _FlexInternalContentViewType {
-            contentStack.commit()
+        superFlex.addItem(view)
+        if let contentStack = contentStackPointer.value as? _FlexLayoutDefinable {
+            contentStack.layoutDefine()
         }
         return self
     }

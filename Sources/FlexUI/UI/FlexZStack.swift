@@ -10,7 +10,7 @@ import UIKit
 
 public struct FlexZStack: FlexView, _FlexViewType {
     public let view: UIView = _FlexZStackView()
-    public let children: _FlexViewType
+    private let children: _FlexViewType
 
     public init(
         @FlexViewBuilder content: () -> any _FlexViewType
@@ -18,6 +18,7 @@ public struct FlexZStack: FlexView, _FlexViewType {
         children = content()
     }
 
+    @_spi(Internals)
     @discardableResult
     public func define(superFlex: FlexLayout.Flex) -> Self {
         // swiftlint:disable:next force_cast

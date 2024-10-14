@@ -30,6 +30,7 @@ public struct FlexPositionModifier: _FlexModifierType {
     ///
     /// - Parameter element: 需要被修改的视图，必须遵循 `FlexView` 协议。
     /// - Returns: 修改后的视图，应用了 `position` 属性。
+    @_spi(Internals)
     public func modify(element: any FlexView) -> any FlexView {
         element.view.flex.position(value)
         return element

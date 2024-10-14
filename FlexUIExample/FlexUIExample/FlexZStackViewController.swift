@@ -17,6 +17,7 @@ final class FlexZStackViewController: BasicViewController {
                     .layoutDirection(.vertical)
                     .alwaysBounces(true)
                     .showsScrollIndicator(true)
+                    .grow(1).shrink(1)
                     .contentStack { stack in
                         stack.padding(10)
                             .spacing(vertical: 20)

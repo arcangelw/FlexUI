@@ -9,7 +9,7 @@ import FlexLayout
 import Foundation
 
 public struct FlexJoin: _FlexViewType {
-    public let children: [any FlexView]
+    private let children: [any FlexView]
 
     public init(@FlexViewBuilder content: () -> any _FlexViewType, @FlexViewBuilder separator: () -> any _FlexViewType) {
         var result: [any FlexView] = []
@@ -27,6 +27,7 @@ public struct FlexJoin: _FlexViewType {
         children = result
     }
 
+    @_spi(Internals)
     public func flex_make() -> [any FlexView] {
         children
     }

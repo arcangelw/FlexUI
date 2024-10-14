@@ -14,6 +14,7 @@ public struct FlexItem<View: UIView>: FlexView, _FlexViewType {
         self.view = view
     }
 
+    @_spi(Internals)
     @discardableResult
     public func define(superFlex: FlexLayout.Flex) -> Self {
         superFlex.addItem(view)

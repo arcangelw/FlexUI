@@ -52,6 +52,7 @@ public struct FlexSpacingModifier: _FlexModifierType {
     ///
     /// - Parameter element: 需要被修改的视图，必须遵循 `FlexView` 协议。
     /// - Returns: 修改后的视图，应用了间距属性。
+    @_spi(Internals)
     public func modify(element: any FlexView) -> any FlexView {
         let flex = element.view.flex
         horizontalSpacingPointer.bindNoOptionalValue(flex.columnGap(_:), nil)

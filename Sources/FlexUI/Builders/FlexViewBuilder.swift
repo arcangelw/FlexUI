@@ -9,10 +9,12 @@ import FlexLayout
 import UIKit
 
 public protocol _FlexViewType {
+    @_spi(Internals)
     func flex_make() -> [any FlexView]
 }
 
 extension Array: _FlexViewType where Element: _FlexViewType {
+    @_spi(Internals)
     public func flex_make() -> [any FlexView] {
         flatMap {
             $0.flex_make()
@@ -21,18 +23,21 @@ extension Array: _FlexViewType where Element: _FlexViewType {
 }
 
 extension UIView: _FlexViewType {
+    @_spi(Internals)
     public func flex_make() -> [any FlexView] {
         return [FlexItem(self)]
     }
 }
 
 extension Optional: _FlexViewType where Wrapped: _FlexViewType {
+    @_spi(Internals)
     public func flex_make() -> [any FlexView] {
         map { $0.flex_make() } ?? []
     }
 }
 
 public extension _FlexViewType where Self: FlexView {
+    @_spi(Internals)
     func flex_make() -> [any FlexView] {
         return [self]
     }

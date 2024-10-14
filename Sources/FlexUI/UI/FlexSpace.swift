@@ -11,9 +11,9 @@ import UIKit
 public struct FlexSpace: FlexView, _FlexViewType {
     public let view: UIView = _FlexView()
 
-    public let width: CGFloat?
+    private let width: CGFloat?
 
-    public let height: CGFloat?
+    private let height: CGFloat?
 
     public init(size: CGSize) {
         width = size.width
@@ -25,6 +25,7 @@ public struct FlexSpace: FlexView, _FlexViewType {
         self.height = height
     }
 
+    @_spi(Internals)
     @discardableResult
     public func define(superFlex: FlexLayout.Flex) -> Self {
         superFlex.addItem(view).width(width).height(height)

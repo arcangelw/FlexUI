@@ -18,6 +18,7 @@ public protocol _FlexModifierType {
     ///
     /// - Parameter element: 需要被修改的视图，必须遵循 `FlexView` 协议。
     /// - Returns: 修改后的视图实例，仍然遵循 `FlexView` 协议。
+    @_spi(Internals)
     func modify(element: any FlexView) -> any FlexView
 }
 
@@ -32,7 +33,7 @@ public struct FlexModifiedContent<Content: _FlexViewType, Modifier: _FlexModifie
     /// 应用的修饰器。
     let modifier: Modifier
     /// 前一个修饰器，用于支持链式调用多个修饰器。
-    fileprivate let previousModifier: FlexModifier?
+    private let previousModifier: FlexModifier?
 
     /// 初始化方法。
     ///
@@ -53,6 +54,7 @@ public struct FlexModifiedContent<Content: _FlexViewType, Modifier: _FlexModifie
     /// 生成修改后的 Flex 布局视图数组。
     ///
     /// - Returns: 修改后的布局视图数组。
+    @_spi(Internals)
     public func flex_make() -> [any FlexView] {
         content.flex_make().map(modify(element:))
     }
@@ -61,7 +63,7 @@ public struct FlexModifiedContent<Content: _FlexViewType, Modifier: _FlexModifie
     ///
     /// - Parameter newModifier: 新的修饰器。
     /// - Returns: 新的 `FlexModifiedContent` 实例，包含已应用的修饰器。
-    public func modifier<NewModifier: _FlexModifierType>(_ newModifier: NewModifier) -> FlexModifiedContent<Content, NewModifier> {
+    func modifier<NewModifier: _FlexModifierType>(_ newModifier: NewModifier) -> FlexModifiedContent<Content, NewModifier> {
         .init(content: content, modifier: newModifier, previousModifier: FlexModifier(modify(element:)))
     }
 
@@ -93,7 +95,7 @@ public struct FlexModifier: _FlexModifierType {
     /// 初始化方法。
     ///
     /// - Parameter modify: 一个闭包，用于修改视图。
-    public init(
+    init(
         _ modify: @escaping (any FlexView) -> any FlexView
     ) {
         _modify = modify
@@ -103,6 +105,7 @@ public struct FlexModifier: _FlexModifierType {
     ///
     /// - Parameter element: 需要被修改的视图。
     /// - Returns: 修改后的视图。
+    @_spi(Internals)
     public func modify(element: any FlexView) -> any FlexView {
         _modify(element)
     }

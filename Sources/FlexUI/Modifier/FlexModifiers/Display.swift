@@ -36,6 +36,7 @@ public struct FlexDisplayModifier: _FlexModifierType {
     /// - Returns: 返回应用了显示属性的视图，支持链式调用。
     ///
     /// - Note: 该方法将通过 `Flex` 布局的 `display(_:)` 方法设置视图的显示属性，允许隐藏或显示视图。
+    @_spi(Internals)
     public func modify(element: any FlexView) -> any FlexView {
         element.view.flex.display(value)
         return element

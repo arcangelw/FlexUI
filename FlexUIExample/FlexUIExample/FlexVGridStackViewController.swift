@@ -17,6 +17,7 @@ final class FlexVGridStackViewController: BasicViewController {
                     .layoutDirection(.vertical)
                     .alwaysBounces(true)
                     .showsScrollIndicator(true)
+                    .grow(1).shrink(1)
                     .contentStack { stack in
                         stack
                             .padding(10)

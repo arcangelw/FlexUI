@@ -54,6 +54,7 @@ public struct FlexMaxSizeModifier: _FlexModifierType {
     /// 应用最大宽度和最大高度到指定的视图。
     /// - Parameter element: 需要修改的视图。
     /// - Returns: 经过修改的视图。
+    @_spi(Internals)
     public func modify(element: any FlexView) -> any FlexView {
         let flex = element.view.flex
         maxWidthPointer.bindValue(flex.maxWidth(_:), flex.maxWidth(_:))
